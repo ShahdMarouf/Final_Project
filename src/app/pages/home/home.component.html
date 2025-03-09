@@ -1,0 +1,74 @@
+<section class="container mx-auto">
+     <section class="static-slider py-5">
+         <div class="flex">
+            <div class="slider w-[70%]">
+                <owl-carousel-o [options]="custommainslider">
+                    <ng-template carouselSlide><img src="/images/slider-image-1.jpeg" class="w-full h-[300px]"></ng-template>  
+                    <ng-template carouselSlide><img src="/images/slider-image-2.jpeg" class="w-full h-[300px]"></ng-template>  
+                    <ng-template carouselSlide><img src="/images/slider-image-3.jpeg" class="w-full h-[300px]"></ng-template>  
+                  </owl-carousel-o>
+            </div>
+            <div class="slider2/3 w[30%]">
+             <img src="/images/slider-image-2.jpeg" class="w-full h-[150px] " >
+             <img src="/images/slider-image-3.jpeg" class="w-full h-[150px]" >
+
+            </div>
+         </div>
+     </section>
+    <section class="catergories py-5">
+        <h2 class="capitalize text-3xl mb-4 text-gray-600">shop popular categories</h2>
+
+        <owl-carousel-o [options]="customOptions">
+
+        @for (item of categorylist; track $index) {
+            <ng-template carouselSlide>
+                <div >
+                    <img [src]="item.image" class="w-full h-[250px]" height="250px" >
+                    <h3 class="text-green-600 m-4">{{item.name}}</h3>
+                </div>
+              </ng-template>
+          
+        }
+        
+          </owl-carousel-o>
+    </section>
+    <section class="products my-5">
+
+
+        <h2 class="capitalize text-3xl mb-4 text-gray-600">popular products</h2>
+
+        
+        
+        <input  [(ngModel)]="searchTerm" type="text" class=" max-w-md my-10 block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 " placeholder="Search Mockups, Logos..." required />
+  
+           <div class="gap-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      
+            @for (item of productlist.slice(0,12)|search:searchTerm ; track $index) {
+                    <div class="card max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
+                        <a [routerLink]="['/details',item.id]">
+
+                        <div class="card-img">
+                          <img [src]="item.imageCover" class="w-full" alt="" >
+                        </div>
+                          <div class="card-body p-5">
+                              <a >
+                                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{item.title }}</h5>
+                              </a>
+                              <p class="mb-3 font-normal text-gray-700 ">{{item.description}}</p>
+                             
+                          </div>
+                        </a>
+
+                          <div class="flex items-center justify-between m-3">
+                              <span class="text-l  text-gray-500 ">{{item.price|currency:"EGP" }}</span>
+                              <button (click)="addToCart(item.id)" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Add to cart</button>
+                          </div>
+                      </div>
+
+
+              
+                
+            }
+           </div>
+    </section>
+</section>

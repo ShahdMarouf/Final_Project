@@ -1,0 +1,42 @@
+<section class="p-5 m-5 bg-gray-300">
+ <h1 class="text-4xl mb-4 text-green-600">your Cart</h1>
+ <p class="text-gray-600 mb-4">Total Price: <span class="text-green-600">{{cartData.totalCartPrice | currency:"EGP"}}</span></p>
+@if(cartData.products.length>0){
+    @for (item of cartData.products; track $index) {
+        <div class="product flex m-2">
+         <div class="img w-[10%]">
+             <img [src]="item.product.imageCover" class="w-[100%]">
+         </div>
+         <div class="information w-[90%] flex justify-between items-center px-10">
+             <div class="data">
+                 <h1 class="text-2xl font-bold mb-4">{{item.product.title}}</h1>
+                 <p class="mb-4">price: <span class="text-green-600">{{item.price |currency:"EGP"  }}</span></p>
+                 <button (click)="removeItem(item.product.id)" class="text-red-600"><i class="fa fa-trash"></i>  Remove</button>
+             </div>
+             <div class="buttons flex space-x-3 items-center ">
+                 <button (click)="updateQuantity(item.product.id,item.count+1)" class="text-3xl bg-transparent text-green-600 border-2 border-green-600 p-2 rounded-md"><i class="fa-solid fa-plus"></i></button>
+                 <span>{{item.count}}</span>
+                 <button (click)="updateQuantity(item.product.id,item.count-1)" class="text-3xl bg-transparent text-green-600 border-2 border-green-600 p-2 rounded-md"><i class="fa-solid fa-minus"></i></button>
+     
+             </div>
+     
+         </div>
+        </div>
+      @if (!$last) {
+         <div class="sep bg-gray-600 h-[1px]">
+     
+         </div>
+      }
+      }
+     
+      <div class="buttons flex justify-between ">
+         <button (click)="clearCart()" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3" >Clear Cart</button>
+     
+         <button [routerLink]="['/checkout', cartId]" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-3" >Check Out</button>
+     
+      </div>
+     
+}@else{
+    <p class="text-3xl text-center my-10 text-gray-600">your Cart is Empty</p>
+}
+</section>

@@ -1,0 +1,157 @@
+<section>
+    <h1 class="text-4xl text-green-600 my-6 ms-16 ">Register Now</h1>
+        
+
+<form class="max-w-lg mx-auto p-5 w-[80%] " [formGroup]="registerform" (ngSubmit)="submit()" >
+ @if(errormsg!=''){
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+    {{errormsg}}
+  </div>
+ }
+ @let passctrl=registerform.controls['password'];
+ @let repassctrl=registerform.controls['rePassword'];
+
+ 
+  <div class="mb-5">
+    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Your name</label>
+    <input formControlName="name" type="text" id="name" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"  required />
+    @let namectrl=registerform.controls['name'];
+    @if(namectrl.errors && namectrl.touched){
+      <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 my-2" role="alert">
+        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <span class="font-medium">Ensure that these requirements are met:</span>
+            <ul class="mt-1.5 list-disc list-inside">
+              @if(namectrl.hasError('required')){
+                <li>Your name is required</li>
+              }
+              @if(namectrl.hasError('minlength') ){
+                <li>At least 5 characters (and up to 20 characters)</li>
+              }
+              @if(namectrl.hasError('maxlength') ){
+                <li>At most 50 characters</li>
+              }
+          </ul>
+        </div>
+      </div>
+     }
+  </div>
+    <div class="mb-5">
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
+      <input formControlName="email" type="email" id="email" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 placeholder:text-gray-400 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="name@flowbite.com" required />
+     @let emailctrl=registerform.controls['email'];
+      @if(emailctrl.errors && emailctrl.touched){
+        <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 my-2" role="alert">
+          <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <span class="font-medium">Ensure that these requirements are met:</span>
+              <ul class="mt-1.5 list-disc list-inside">
+                @if(emailctrl.hasError('required')){
+                  <li>Your email is required</li>
+                }
+                @if(emailctrl.hasError('email') ){
+                  <li>Invalid Email</li>
+                }
+               
+            </ul>
+          </div>
+        </div>
+       }
+    
+    </div>
+    <div class="mb-5">
+      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Your password</label>
+      <input formControlName="password" type="password" id="password" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" required />
+      @if(passctrl.errors && passctrl.touched){
+        <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 my-2" role="alert">
+          <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <span class="font-medium">Ensure that these requirements are met:</span>
+              <ul class="mt-1.5 list-disc list-inside">
+                @if(passctrl.hasError('required')){
+                  <li>Password is required</li>
+                }
+                @if(passctrl.hasError('minlength') ){
+                  <li>Invalid password</li>
+                }
+            </ul>
+          </div>
+        </div>
+       }
+    </div>
+    <div class="mb-5">
+      <label for="rePassword" class="block mb-2 text-sm font-medium text-gray-900 ">Repeat password</label>
+      <input formControlName="rePassword" type="password" id="rePassword" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" required />
+      @if(repassctrl.errors && repassctrl.touched){
+        <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 my-2" role="alert">
+          <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <span class="font-medium">Ensure that these requirements are met:</span>
+              <ul class="mt-1.5 list-disc list-inside">
+                @if(repassctrl.hasError('required')){
+                  <li>Password is required</li>
+                }
+                @if(repassctrl.value !== passctrl.value){
+                  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                    repassword not match your password  </div>
+                 }
+          
+            </ul>
+          </div>
+        </div>
+       }
+    </div>
+    <div class="mb-5">
+        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">Phone</label>
+        <input formControlName="phone" type="tel" id="phone" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" required />
+        @let phonectrl=registerform.controls['phone'];
+        @if(phonectrl.errors && phonectrl.touched){
+          <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 my-2" role="alert">
+            <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Danger</span>
+            <div>
+              <span class="font-medium">Ensure that these requirements are met:</span>
+                <ul class="mt-1.5 list-disc list-inside">
+                  @if(phonectrl.hasError('required')){
+                    <li>Phone is required</li>
+                  }
+                  @if(phonectrl.hasError('pattern')){
+                    <li>Invalid phone number</li>
+                  }
+            
+              </ul>
+            </div>
+          </div>
+         }
+      </div>
+    <div class="flex items-start mb-5">
+      <div class="flex items-center h-5">
+        <input id="terms" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-green-300 text-green-400" required />
+      </div>
+      <label for="terms" class="ms-2 text-sm font-medium text-gray-400 ">I agree with the <a href="#" class="text-green-600 hover:underline dark:text-green-500">terms and conditions</a></label>
+    </div>
+    <button type="submit" class="main-btn" (click)="submit()" [disabled]="isloading">
+      Register new account 
+      @if(isloading) {
+        <i class="fa-solid fa-spinner fa-spin"></i>
+      }
+       
+    </button>
+  </form>
+  </section>
+
+ 
